@@ -1,0 +1,10 @@
+name: C build and tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+      - run: cmake --build build
+      - run: ctest --test-dir build --output-on-failure
